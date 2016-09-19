@@ -6,9 +6,21 @@
   <h1>Please enter your origin and destination</h1>
   <input id="origin"></input>
   <input id="destination"></input>
+  <button type="button" onclick="get_traffic()">Get traffic time!</button>
 </body>
 <script>
 var origin = $('#origin').val();
 var destination = $('#destination').val();
-var traffic = $.ajax()
+var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+ origin + 'Vancouver+BC|Seattle&destinations=' + destination + 'San+Francisco|Victoria+BC&key=AIzaSyBA_6yt0N8GuaI3f0nBeM5WLCqlW9W6ehg
+google maps'
+function get_traffic(){
+var traffic = $.ajax({
+     type: "GET",
+     url: url,
+     success: function(response){
+         alert(response);
+     }
+     });
+}
+
 </script>
