@@ -1,0 +1,45 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+  </script>
+</head>
+<body>
+  <h1>Please enter your origin and destination</h1>
+  <input id="origin_city"></input>
+  <input id="origin_state"></input>
+  <input id="destination_city"></input>
+  <input id="destination_state"></input>
+  <button type="button" onclick="get_traffic()">Get traffic time!</button>
+</body>
+<script>
+
+
+function get_traffic(){
+  
+  var origin_city = $('#origin_city').val();
+  var origin_state = $('#origin_state').val();
+  var destination_city = $('#destination_city').val();
+  var destination_state = $('#destination_state').val();
+
+  origin_city = origin_city.replace(/ /g,'+');
+  origin_state = origin_state.replace(/ /g,'+');
+  destination_city = destination_city.replace(/ /g, '+');
+  destination_state = destination_state.replace(/ /g, '+');
+
+  var origin = origin_city + ',' + origin_state; 
+  var destination = destination_city + ',' + destination_state;
+
+  var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + origin + '&destinations=' + destination + '&key=AIzaSyDci-SFGlohnd_fK_pjnkXCSeMaCPPS228';
+
+  var traffic = $.ajax({
+   type: "GET",
+   headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+   url: url,
+   success: function(response){
+     console.log(response);
+   }
+ });
+}
+
+</script>
