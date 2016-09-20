@@ -32,16 +32,16 @@ function get_traffic(){
   var destination = destination_city + ',' + destination_state;
 
 
-var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyDci-SFGlohnd_fK_pjnkXCSeMaCPPS228'
+var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyDci-SFGlohnd_fK_pjnkXCSeMaCPPS228';
 
 
 
-var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-var origin2 = 'Greenwich, England';
-var destinationA = 'Stockholm, Sweden';
-var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
+// var origin2 = 'Greenwich, England';
+// var destinationA = 'Stockholm, Sweden';
+// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
 
-console.log(destinationB)
+
 
 var service = new google.maps.DistanceMatrixService();
 service.getDistanceMatrix(
