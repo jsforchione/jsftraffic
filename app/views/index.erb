@@ -41,13 +41,20 @@ var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperi
 // var destinationA = 'Stockholm, Sweden';
 // var destinationB = new google.maps.LatLng(50.087692, 14.421150);
 
-
+// PSEUDOOOO
+// 1. geocode origin and destination to get latlong pairs for distance matrix 
+// 2. modify button, so that when button is clicked, rerender page to display text that shows the distance and time between places
+// 3. also have a new button come up that will ask user if they want to save this origin destination pair with travel time
+// 4. create a table called trips: column for origin, destination, distance, travel time, and time of day, timestamps
+// 5. create a users table: name, timestamps 
+// 6. one to many relationship between users and trips (one user can have many trips)
+// 7. another page that has trip calculator, you can enter origin and destination and a desired departure time. calculator will find trips that match certain criteria with matching origin and destination. it will order them by departure time and then give user fastest departure time. will order them from least to most.
 
 var service = new google.maps.DistanceMatrixService();
 service.getDistanceMatrix(
   {
-    origins: [origin1, origin2],
-    destinations: [destinationA, destinationB],
+    origins: [origin1, origin],
+    destinations: [destination, destinationB],
     travelMode: 'DRIVING',
     // transitOptions: TransitOptions,
     // drivingOptions: DrivingOptions,
