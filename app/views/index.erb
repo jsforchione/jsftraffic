@@ -7,8 +7,11 @@
 </head>
 <body>
   <h1>Please enter your origin and destination</h1>
+  <input id="origin_street"></input>
   <input id="origin_city"></input>
   <input id="origin_state"></input>
+
+  <input id="destination_street"></input>
   <input id="destination_city"></input>
   <input id="destination_state"></input>
   <button type="button" onclick="get_traffic()">Get traffic time!</button>
@@ -17,29 +20,62 @@
 
 
 function get_traffic(){
-  
+  var origin_street = $('#origin_street').val();
   var origin_city = $('#origin_city').val();
   var origin_state = $('#origin_state').val();
+  var origin_LatLng = '';
+  var destination_street = $('#destination_street').val();
   var destination_city = $('#destination_city').val();
   var destination_state = $('#destination_state').val();
+  var destination_Lat = '';
+  var destination_Lng = '';
+  var origin_Lat = '';
+  var origin_Lng = '';
 
   origin_city = origin_city.replace(/ /g,'+');
   origin_state = origin_state.replace(/ /g,'+');
   destination_city = destination_city.replace(/ /g, '+');
   destination_state = destination_state.replace(/ /g, '+');
 
-  var origin = origin_city + ',' + origin_state; 
-  var destination = destination_city + ',' + destination_state;
+  var origin = origin_street + ' ' +origin_city + ',' + origin_state; 
+  var destination = destination_street + ' ' + destination_city + ',' + destination_state;
+
+  var geocoder = new google.maps.Geocoder();
+
+
+  geocoder.geocode({'address': origin_street + ' ' + origin_city + ',' + origin_state}, function(results, status) {
+    if (status === 'OK') {
+      console.log("HELO");
+      origin = results[0];
+
+      origin_Lat = results[0].geometry.viewport.f.b;
+      origin_Lng = results[0].geometry.viewport.b.b;
+      ///console.log(origin);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  })
+
+   geocoder.geocode({'address': destination_street + ' ' + destination_city + ',' + destination_state}, function(results, status) {
+    if (status === 'OK') {
+
+      destination_Lat = results[0].geometry.viewport.f.b;
+      destination_Lng = results[0].geometry.viewport.b.b;
+      ///console.log(origin);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  })
 
 
 var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyDci-SFGlohnd_fK_pjnkXCSeMaCPPS228';
 
 
 
-// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-// var origin2 = 'Greenwich, England';
-// var destinationA = 'Stockholm, Sweden';
-// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+ var origin1 = new google.maps.LatLng(origin_Lat, origin_Lng);
+ var origin2 = origin;
+ var destinationA = destination;
+ var destinationB = new google.maps.LatLng(destination_Lat, destination_Lng);
 
 // PSEUDOOOO
 // 1. geocode origin and destination to get latlong pairs for distance matrix 
@@ -49,6 +85,8 @@ var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperi
 // 5. create a users table: name, timestamps 
 // 6. one to many relationship between users and trips (one user can have many trips)
 // 7. another page that has trip calculator, you can enter origin and destination and a desired departure time. calculator will find trips that match certain criteria with matching origin and destination. it will order them by departure time and then give user fastest departure time. will order them from least to most.
+
+
 
 var service = new google.maps.DistanceMatrixService();
 service.getDistanceMatrix(
@@ -63,14 +101,13 @@ service.getDistanceMatrix(
     // avoidTolls: Boolean,
   }, callback);
 
-function callback(response, status) {
-  // See Parsing the Results for
-  // the basics of a callback function.
-
-  console.log(response)
+  function callback(response, status) {
+    // See Parsing the Results for
+    // the basics of a callback function.
+    console.log(response.rows[1].elements[0].duration.text);
+    console.log(response.rows[1].elements[0].duration.value);
+    var distanceValue = response.rows[1].elements[0].duration.value;
+  };
 }
-
-  ;
-  }
 
 </script>
