@@ -1,0 +1,14 @@
+<div class='container'>
+  <h1>JSF Traffic</h1>
+  <% if @errors %>
+    <p><%= "#{@errors[0]}" %>
+    </p>
+    <% end %>
+  <form action='/users' method='POST'>
+    <label>First Name:</label><input type="text" name="first_name">
+    <label>Last Name:</label><input type="text" name="last_name">
+    <label>Email:</label><input type='text' name='user[email]'><br/>
+    <label>Password:</label><input type='password' name='user[password]'><br/>
+    <input type='submit' value='Register User'>
+  </form>
+</div>
