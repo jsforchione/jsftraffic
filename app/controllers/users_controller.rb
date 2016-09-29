@@ -26,7 +26,7 @@ post '/users' do
     redirect "/users/#{@user.id}"
   else 
     @errors = ["Username or Email already exists"]
-    erb :'users/new'
+    redirect 'users/new'
   end
 end
 

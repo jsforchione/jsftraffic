@@ -5,8 +5,8 @@
     </p>
     <% end %>
   <form action='/users' method='POST'>
-    <label>First Name:</label><input type="text" name="first_name">
-    <label>Last Name:</label><input type="text" name="last_name">
+    <label>First Name:</label><input type="text" name="user[first_name]">
+    <label>Last Name:</label><input type="text" name="user[last_name]">
     <label>Email:</label><input type='text' name='user[email]'><br/>
     <label>Password:</label><input type='password' name='user[password]'><br/>
     <input type='submit' value='Register User'>
