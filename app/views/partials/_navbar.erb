@@ -8,7 +8,10 @@
       <li><a href="/">New Route</a></li>
       <li><a href="/routes/index">All routes</a></li> 
       <li><a href="/routes/search">Search Routes</a></li> 
-      <button id="login" type="button" class="btn btn-default navbar-btn">Login</button>
+      <form action="sessions/new">
+        <button id="login" type="submit" class="btn btn-default navbar-btn">Login</button>
+      </form> 
+      <!-- need to create and if statement that only shows login if no current user, otherwise show a logout button -->
     </ul>
   </div>
 </nav>
