@@ -4,14 +4,22 @@ end
 
 get '/routes/index' do
   @params = params
-  if @params[:destination].present? && @params[:origin].present?
-    routes = Route.where(:origin => params[:origin], :destination => params[:destination], :creator_id => current_user.id)
-    @routes = routes.order(:duration_value)
+  p "******************"
+
+  if logged_in? == false
+    erb :'/index'
   else
-    routes = Route.all.where(:creator_id => current_user.id)
-    @routes = routes.order(:duration_value)
+    if @params[:destination].present? && @params[:origin].present?
+      routes = Route.where(:origin => params[:origin], :destination => params[:destination], :creator_id => current_user.id)
+      @routes = routes.order(:duration_value)
+      erb :'routes/index'
+    else
+      routes = Route.all.where(:creator_id => current_user.id)
+      @routes = routes.order(:duration_value)
+      erb :'routes/index'
+    end
   end
-  erb :'routes/index'
+  
 end
 
 get '/routes/search' do
