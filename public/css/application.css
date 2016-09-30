@@ -2,6 +2,25 @@
   background-color: #172C5A;
 }
 
+body {
+  width: 100%;
+  height: 100%;
+}
+
 /*#welcome-page {
   font-color: blue;
 }*/
+
+#my-picture {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: .3;
+  background-image: url('https://sarahvercoeimages.files.wordpress.com/2015/01/road-to-mt-cook.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
