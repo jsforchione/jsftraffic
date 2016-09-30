@@ -1,11 +1,14 @@
-<table>
-  <th>
-    <td>Departure Time</td>
-    <td>From</td>
-    <td>To</td>
-    <td>Duration</td>
-    <td>Distance</td>
-  </th>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Departure Time</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Duration</th>
+    <th>Distance</th>
+  </tr>
+</thead>
+<tbody>
   <% @routes.each do |route| %>
   <tr>
     <td><%= route.departure_time %></td>
@@ -15,4 +18,5 @@
     <td><%= route.distance_text %></td>
   </tr>
   <% end %>
+</tbody>
 </table>
