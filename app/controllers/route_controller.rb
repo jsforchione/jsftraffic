@@ -34,7 +34,7 @@ post '/routes' do
     @min = "0" + @min.to_s
   end 
 
-  if @hour > 13
+  if @hour > 12
     @hour = @hour - 12
     @hour = @hour.to_s
     @min = @min.to_s
