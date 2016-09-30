@@ -31,4 +31,5 @@ body {
   z-index: 1;
   color: #fff !important;
   padding-top: 280px;
+  text-shadow: 2px 2px black;
 }
