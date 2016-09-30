@@ -4,7 +4,6 @@ end
 
 get '/routes/index' do
   @params = params
-  p "******************"
 
   if logged_in? == false
     erb :'/index'
@@ -27,15 +26,14 @@ get '/routes/search' do
 end
 
 post '/routes' do
-  # require 'pry-byebug'
-  # binding.pry 
+
   @time = Time.now
   @hour = @time.hour
   @min = @time.min
   if @min < 10 
     @min = "0" + @min.to_s
   end 
-  
+
   if @hour > 13
     @hour = @hour - 12
     @hour = @hour.to_s
@@ -46,8 +44,7 @@ post '/routes' do
     @min = @min.to_s
     @humanReadableTime = "#{@hour}:#{@min} AM"
   end 
-p "*" * 100 
-  p current_user
+
   @route = Route.new(:creator_id => current_user.id, :departure_time => @humanReadableTime, :origin => params[:origin],:destination => params[:destination], :duration_value => params[:duration_value], :duration_text => params[:duration_text], :distance_value => params[:distance_value], :distance_text => params[:distance_text])
   if @route.save
     redirect "routes/index"

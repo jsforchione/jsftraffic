@@ -1,7 +1,7 @@
 <div id="my-picture">
   <% if session[:user_id] %>
-    <h2 id="about">Hi <%= @user.first_name %>! Welcome to my Traffic App! This took a lot of time, so you better enjoy it...  :)</h2>
+    <h2 id="about">Hi <%= current_user.first_name %>! Welcome to your Traffic App! A way to "predict" traffic time based off of past traffic times.</h2>
   <% else %>
-    <h2 id="about">Welcome to my Traffic App! This took a lot of time, so you better enjoy it...  :)</h2>
+    <h2 id="about">Welcome to your Traffic App! A way to "predict" traffic time based off of past traffic times.</h2>
   <% end %>
 </div>
