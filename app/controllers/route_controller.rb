@@ -1,14 +1,15 @@
-get '/' do
-  @title = 'Hello World!'
+get '/routes/new' do
   erb :'routes/new'
 end
 
 get '/routes/index' do
   @params = params
   if @params[:destination].present? && @params[:origin].present?
-    @routes = Route.where(:origin => params[:origin], :destination => params[:destination]).order(:duration_value)
+    routes = Route.where(:origin => params[:origin], :destination => params[:destination], :creator_id => current_user.id)
+    @routes = routes.order(:duration_value)
   else
-    @routes = Route.all
+    routes = Route.all.where(:creator_id => current_user.id)
+    @routes = routes.order(:duration_value)
   end
   erb :'routes/index'
 end
@@ -31,7 +32,7 @@ post '/routes' do
     @min += ' am'
   end
   @humanReadableTime = "#{@hour}:#{@min}"
-  @route = Route.new(:departure_time => @humanReadableTime, :origin => params[:origin],:destination => params[:destination], :duration_value => params[:duration_value], :duration_text => params[:duration_text], :distance_value => params[:distance_value], :distance_text => params[:distance_text])
+  @route = Route.new(:creator_id => current_user.id, :departure_time => @humanReadableTime, :origin => params[:origin],:destination => params[:destination], :duration_value => params[:duration_value], :duration_text => params[:duration_text], :distance_value => params[:distance_value], :distance_text => params[:distance_text])
   if @route.save
     redirect "routes/index"
   else
@@ -40,10 +41,10 @@ post '/routes' do
 end
 
 get '/routes/:id' do
-   @route = Route.find(params[:id])
+   @route = Route.find(params[:id]).where(:creator_id => current_user.id)
    if @route
     erb :'routes/show'
   else
-    p "ERRRRRROR!!!"
+    erb :'routes/search'
   end
 end
