@@ -27,18 +27,9 @@ get '/routes/search' do
 end
 
 post '/routes' do 
-  @time = Time.new
-  @hour = @time.hour
+  @time = Time.local
+  @hour = @time.hour.to_s
   @min = @time.min.to_s
-  if @hour.to_int > 13
-    @hour = @hour - 12
-    @hour = @hour.to_s
-    @min += ' pm'
-
-  else
-    @hour = @hour.to_s
-    @min += ' am'
-  end
   @humanReadableTime = "#{@hour}:#{@min}"
   @route = Route.new(:creator_id => current_user.id, :departure_time => @humanReadableTime, :origin => params[:origin],:destination => params[:destination], :duration_value => params[:duration_value], :duration_text => params[:duration_text], :distance_value => params[:distance_value], :distance_text => params[:distance_text])
   if @route.save
