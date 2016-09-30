@@ -1,0 +1,12 @@
+<div class='container'>
+  <h1>Login</h1>
+  <form action ='/sessions' method='POST'>
+    <label>Email:</label><input type="text" name="email">
+    <label>Password:</label><input type="password" name="password">
+    <input type='submit' value='login'>
+  </form>
+
+  <% if @errors %>
+    <font color="red"><%= @errors %></font>
+  <% end %>
+</div>
