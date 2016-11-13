@@ -12,10 +12,10 @@
       <% if session[:user_id] %>
         <form class="navbar-form navbar-right" action="/sessions" method="POST"><input name="_method" type="hidden" value="DELETE"><input type="submit" class="btn btn-link" value="Logout"></form>
       <% else %>
-        <form class="navbar-form navbar-right" action="sessions/new">
+        <form class="navbar-form navbar-right" action="/sessions/new">
         <button id="login" type="submit" class="btn btn-link">Login</button>
         </form> 
-        <form class="navbar-form navbar-right" action="users/new">
+        <form class="navbar-form navbar-right" action="/users/new">
         <button id="login" type="submit" class="btn btn-link">Create Account</button>
         </form> 
       <% end %>
